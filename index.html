@@ -54,7 +54,7 @@
 		<li class="dot" id = "dot2">60<br/>Node</li><br/>
 		<li class="dot" id = "dot3">70<br/>Node</li><br/>
 		<div id = "footer">
-		<li class="tail" id = "end">80<br/>Tail</li>
+		<li class="tail" id = "tail">80<br/>Tail</li>
 		</div>
 	</ul>
 	</div>
@@ -68,47 +68,118 @@
 		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
 		<button id = "Randomizer" onclick= "random()">Randomizer(Creates Random List of 5)</button>
 		<button id = "Adder" onclick= "addElement()">Add Element</button>
-		Input Data: <input type="text" id="inputBox" value="Number">
+		<button id = "Remover" onclick= "removeElement()">Pop</button>
+		<button id = "Modifier" onclick= "modifyElement()">Change Element</button>
+		<button id = "Searcher" onclick= "searchElement()">Search for Element</button>
+		
+		<br/><br/>
+	</div>
+	<div id = "inputters"style= "width:100%; height:100%"align="right">
+		Input Data(1 or 2 digit numbers only): <input type="text" id="inputBox" value="Number"><br/>
+		Node Selector(1 is Head, 2 is next Node, etc): <input type="text" id="selectionBox" value="Number"><br/>
+		Index of(Returns what node a value is in): <input type="text" id="searchBox" value="Number">
 	</div>
 
 </body>
 	<script>
 	random();
 			increaser = 0;
+			decreaser = 0;
 			first = Math.random()*100|0;
 			second = Math.random()*100|0;
 			third = Math.random()*100|0;
 			fourth = Math.random()*100|0;
 			fifth = Math.random()*100|0;
 	function random(){
+			increaser = 0;
+			decreaser = 0;
 			first = Math.random()*100|0;
 			second = Math.random()*100|0;
 			third = Math.random()*100|0;
 			fourth = Math.random()*100|0;
 			fifth = Math.random()*100|0;
-			document.getElementById("nodes").innerHTML = "<div id = 'header'><li class='head' id = 'head'>"+first+"<br/>Head</li></div><li class='dot' id = 'dot1'>"+second+"<br/>Node</li><br/><li class='dot' id = 'dot2'>"+third+"<br/>Node</li><br/><li class='dot' id = 'dot3'>"+fourth+"<br/>Node</li><br/><div id = 'footer'><li class='tail' id = 'end'>"+fifth+"<br/>Tail</li></div>"
-		//	footer.style.display = "none";
+			document.getElementById("nodes").innerHTML = "<div id = 'header'><li class='head' id = 'head'>"+first+"<br/>Head</li></div><li class='dot' id = 'dot1'>"+second+"<br/>Node</li><br/><li class='dot' id = 'dot2'>"+third+"<br/>Node</li><br/><li class='dot' id = 'dot3'>"+fourth+"<br/>Node</li><br/><div id = 'footer'><li class='tail' id = 'tail'>"+fifth+"<br/>Tail</li></div>"
 		}
 	function addElement(){
+			increaser++;
 			var input = document.getElementById("inputBox").value;
-			document.getElementById("end").className = "dot";
-			if(document.getElementById('end').innerHTML.charAt(1)=='<')
-			document.getElementById("end").innerHTML = document.getElementById('end').innerHTML.substr(0, 1)+"<br/>Node";
+			document.getElementById("tail").className = "dot";
+			if(document.getElementById('tail').innerHTML.charAt(1)=='<')
+				document.getElementById("tail").innerHTML = document.getElementById('tail').innerHTML.substr(0, 1)+"<br/>Node";
 			else
-			document.getElementById("end").innerHTML = document.getElementById('end').innerHTML.substr(0, 2)+"<br/>Node";
-			document.getElementById("end").id = "dot4";
-			
-		//	var string = document.getElementById("nodes").innerHTML;
-		//	var n = string.indexOf("tail");
-		//	var nString = string.subString(4, string.length);
-			document.getElementById("nodes").innerHTML += "<li class='tail' id = 'end'>"+input+"<br/>Tail</li><br/>"
-		//	console.log(string);
-		//	console.log(n);
-		//	console.log(nString);
-	}
-	function removeElement(){
+				document.getElementById("tail").innerHTML = document.getElementById('tail').innerHTML.substr(0, 2)+"<br/>Node";
+			document.getElementById("tail").id = "dot"+(3+increaser);
+			document.getElementById("nodes").innerHTML += "<li class='tail' id = 'tail'>"+input+"<br/>Tail</li><br/>"
 		
 	}
+	function removeElement(){
+			if(document.getElementById('head').innerHTML.charAt(1)=='<')
+				window.alert(document.getElementById('head').innerHTML.substr(0, 1)+" was removed from the list");
+			else
+				window.alert(document.getElementById('head').innerHTML.substr(0, 2)+" was removed from the list");
+			document.getElementById("head").id = "removed"+(1+decreaser);
+			document.getElementById("removed"+(1+decreaser)).style.display = "none";
+			decreaser++;
+			document.getElementById("dot"+decreaser).id = "head";
+			document.getElementById("head").className = "head";
+			if(document.getElementById('head').innerHTML.charAt(1)=='<')
+				document.getElementById("head").innerHTML = document.getElementById('head').innerHTML.substr(0, 1)+"<br/>Head";
+			else
+				document.getElementById("head").innerHTML = document.getElementById('head').innerHTML.substr(0, 2)+"<br/>Head";
+	}
+	function modifyElement(){
+			var selection = document.getElementById("selectionBox").value;
+			var input = document.getElementById("inputBox").value;
+			if(selection==1){
+				document.getElementById("head").innerHTML = input + "<br/>Head";
+			}
+			else if(selection-increaser==5){
+				document.getElementById("tail").innerHTML = input + "<br/>Tail";
+			}
+			else{
+				document.getElementById("dot"+(selection-1)).innerHTML = input + "<br/>Node";
+			}
+	}
+	function searchElement(){
+			var search = document.getElementById("searchBox").value;
+			for(x = 1; x < (5+(increaser-decreaser)); x++){
+				if(x==1){
+					if(document.getElementById('head').innerHTML.charAt(1)=='<')
+						if(document.getElementById('head').innerHTML.substr(0, 1)==search)
+						{
+							window.alert("Value is at Head");
+						}
+						if(document.getElementById('head').innerHTML.substr(0, 2)==search)
+						{
+							window.alert("Value is at Head");
+						}				
+				}
+				while(x>1&&x<=4+(increaser-decreaser)){
+					if(document.getElementById("dot"+(x-1)).innerHTML.charAt(1)=='<')
+						if(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 1)==search)
+						{
+							window.alert("Value is at Node "+x);
+						}
+						if(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 2)==search)
+						{
+							window.alert("Value is at Node "+x);
+						}
+						x++;
+				}
+				if(x==5+(increaser-decreaser)){
+					if(document.getElementById('tail').innerHTML.charAt(1)=='<')
+						if(document.getElementById('tail').innerHTML.substr(0, 1)==search)
+						{
+							window.alert("Value is at Tail");
+						}
+						if(document.getElementById('tail').innerHTML.substr(0, 2)==search)
+						{
+							window.alert("Value is at Tail");
+						}
+					
+				}
+			}
+			}
 	</script>
 
 	<script src="js/scripts.js"></script>
