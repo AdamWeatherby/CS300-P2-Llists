@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -46,11 +46,17 @@
 	<h1 align = "center">Linked List Visualizer</h1>
 
 	<div id ="nodes" style="text-align:center">
-		<span class="head">40<br/>Head</span>
-		<span class="dot">50<br/>Node</span>
-		<span class="dot">60<br/>Node</span>
-		<span class="dot">70<br/>Node</span>
-		<span class="tail">80<br/>Tail</span>
+	<ul>
+		<div id = "header">
+			<li class="head" id = "head">40<br/>Head</li>
+		</div>
+		<li class="dot" id = "dot1">50<br/>Node</li><br/>
+		<li class="dot" id = "dot2">60<br/>Node</li><br/>
+		<li class="dot" id = "dot3">70<br/>Node</li><br/>
+		<div id = "footer">
+		<li class="tail" id = "end">80<br/>Tail</li>
+		</div>
+	</ul>
 	</div>
 	
 	<div id ="text">
@@ -60,21 +66,49 @@
 
 	<div id = "buttons" style= "width:100%; height:100%"align="center">
 		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
-		<button id = "Randomizer" onclick= "Randomizer()">Randomizer</button>;
+		<button id = "Randomizer" onclick= "random()">Randomizer(Creates Random List of 5)</button>
+		<button id = "Adder" onclick= "addElement()">Add Element</button>
+		Input Data: <input type="text" id="inputBox" value="Number">
 	</div>
 
 </body>
 	<script>
-	function Randomizer(){
-			console.log("here");
-			nodes.style.display = "none";
-			int first = (int)Math.random()*10;
-			int second = (int)Math.random()*10;
-			int third = (int)Math.random()*10;
-			int fourth = (int)Math.random()*10;
-			int fifth = (int)Math.random()*10;
-			document.getElementById("nodes").innerHTML = " ";
+	random();
+			increaser = 0;
+			first = Math.random()*100|0;
+			second = Math.random()*100|0;
+			third = Math.random()*100|0;
+			fourth = Math.random()*100|0;
+			fifth = Math.random()*100|0;
+	function random(){
+			first = Math.random()*100|0;
+			second = Math.random()*100|0;
+			third = Math.random()*100|0;
+			fourth = Math.random()*100|0;
+			fifth = Math.random()*100|0;
+			document.getElementById("nodes").innerHTML = "<div id = 'header'><li class='head' id = 'head'>"+first+"<br/>Head</li></div><li class='dot' id = 'dot1'>"+second+"<br/>Node</li><br/><li class='dot' id = 'dot2'>"+third+"<br/>Node</li><br/><li class='dot' id = 'dot3'>"+fourth+"<br/>Node</li><br/><div id = 'footer'><li class='tail' id = 'end'>"+fifth+"<br/>Tail</li></div>"
+		//	footer.style.display = "none";
 		}
+	function addElement(){
+			var input = document.getElementById("inputBox").value;
+			document.getElementById("end").className = "dot";
+			if(document.getElementById('end').innerHTML.charAt(1)=='<')
+			document.getElementById("end").innerHTML = document.getElementById('end').innerHTML.substr(0, 1)+"<br/>Node";
+			else
+			document.getElementById("end").innerHTML = document.getElementById('end').innerHTML.substr(0, 2)+"<br/>Node";
+			document.getElementById("end").id = "dot4";
+			
+		//	var string = document.getElementById("nodes").innerHTML;
+		//	var n = string.indexOf("tail");
+		//	var nString = string.subString(4, string.length);
+			document.getElementById("nodes").innerHTML += "<li class='tail' id = 'end'>"+input+"<br/>Tail</li><br/>"
+		//	console.log(string);
+		//	console.log(n);
+		//	console.log(nString);
+	}
+	function removeElement(){
+		
+	}
 	</script>
 
 	<script src="js/scripts.js"></script>
