@@ -6,6 +6,7 @@
 
   <title>Linked List</title>
   <meta name="Simulator of Linked Lists" content="CS 300 project 2">
+  <!--CSS style section for formatting shapes -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	.dot {
@@ -44,7 +45,7 @@
 <body>
 
 	<h1 align = "center">Linked List Visualizer</h1>
-
+<!--divs for maniplulating visuals with CSS and JavaScript -->
 	<div id ="nodes" style="text-align:center">
 	<ul>
 		<div id = "header">
@@ -63,7 +64,7 @@
 		<p id = "p1" align="center">Enter Data Below to fill linked list
 		</p>		
 	</div>
-
+<!--Buttons -->
 	<div id = "buttons" style= "width:100%; height:100%"align="center">
 		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
 		<button id = "Randomizer" onclick= "random()">Randomizer(Creates Random List of 5)</button>
@@ -74,6 +75,7 @@
 		
 		<br/><br/>
 	</div>
+	<!--Boxes for user inputted data-->
 	<div id = "inputters"style= "width:100%; height:100%"align="right">
 		Input Data(1 or 2 digit numbers only): <input type="text" id="inputBox" value="Number"><br/>
 		Node Selector(0 is Head, 1 is next Node, etc): <input type="text" id="selectionBox" value="Number"><br/>
@@ -82,6 +84,7 @@
 
 </body>
 	<script>
+	<!--declaring of variables-->
 	random();
 			increaser = 0;
 			decreaser = 0;
@@ -90,6 +93,7 @@
 			third = Math.random()*100|0;
 			fourth = Math.random()*100|0;
 			fifth = Math.random()*100|0;
+	<!--"random" creates random Linked List of 5 variables, and resets it-->
 	function random(){
 			increaser = 0;
 			decreaser = 0;
@@ -100,6 +104,7 @@
 			fifth = Math.random()*100|0;
 			document.getElementById("nodes").innerHTML = "<div id = 'header'><li class='head' id = 'head'>"+first+"<br/>Head</li></div><li class='dot' id = 'dot1'>"+second+"<br/>Node</li><br/><li class='dot' id = 'dot2'>"+third+"<br/>Node</li><br/><li class='dot' id = 'dot3'>"+fourth+"<br/>Node</li><br/><div id = 'footer'><li class='tail' id = 'tail'>"+fifth+"<br/>Tail</li></div>"
 		}
+	<!--method to add elements to the tail of the Linked List-->
 	function addElement(){
 			increaser++;
 			var input = document.getElementById("inputBox").value;
@@ -112,6 +117,7 @@
 			document.getElementById("nodes").innerHTML += "<li class='tail' id = 'tail'>"+input+"<br/>Tail</li><br/>"
 		
 	}
+	<!--method to remove elements from the Head of the Linked List-->
 	function removeElement(){
 			if(document.getElementById('head').innerHTML.charAt(1)=='<')
 				window.alert(document.getElementById('head').innerHTML.substr(0, 1)+" was removed from the list");
@@ -127,6 +133,7 @@
 			else
 				document.getElementById("head").innerHTML = document.getElementById('head').innerHTML.substr(0, 2)+"<br/>Head";
 	}
+	<!--Changes element of selected Index with a selected value-->
 	function modifyElement(){
 			var selection = document.getElementById("selectionBox").value;
 			var input = document.getElementById("inputBox").value;
@@ -140,9 +147,11 @@
 				document.getElementById("dot"+(selection)).innerHTML = input + "<br/>Node";
 			}
 	}
+	<!--returns indices of a specified value-->
 	function searchElement(){
 			var search = document.getElementById("searchBox").value;
 			for(x = 1; x < (5+(increaser-decreaser)); x++){
+			<!--Head of List-->
 				if(x==1){
 					if(document.getElementById('head').innerHTML.charAt(1)=='<')
 						if(document.getElementById('head').innerHTML.substr(0, 1)==search)
@@ -154,6 +163,7 @@
 							window.alert("Value is at Head");
 						}				
 				}
+			<!--Nodes in List-->
 				while(x>1&&x<=4+(increaser-decreaser)){
 					if(document.getElementById("dot"+(x-1)).innerHTML.charAt(1)=='<')
 						if(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 1)==search)
@@ -166,6 +176,7 @@
 						}
 						x++;
 				}
+			<!--Tail of List-->
 				if(x==5+(increaser-decreaser)){
 					if(document.getElementById('tail').innerHTML.charAt(1)=='<')
 						if(document.getElementById('tail').innerHTML.substr(0, 1)==search)
