@@ -6,7 +6,36 @@
 
   <title>Linked List</title>
   <meta name="Simulator of Linked Lists" content="CS 300 project 2">
-  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	.dot {
+	height: 45px;
+	width: 45px;
+	color: white;
+	border-radius: 100%;
+	display: inline-block;
+	background: black;
+	text-align: center;
+	}
+	.head {
+	height: 45px;
+	width: 45px;
+	color: white;
+	border-radius: 100%;
+	display: inline-block;
+	background: green;
+	text-align: center;
+	}
+	.tail {
+	height: 45px;
+	width: 45px;
+	color: white;
+	border-radius: 100%;
+	display: inline-block;
+	background: red;
+	text-align: center;
+	}
+</style>
 	
   <link rel="stylesheet" href="css/styles.css?v=1.0">
 
@@ -14,19 +43,39 @@
 
 <body>
 
-	<h1 align = "center">CS 300 project 2</h1>
+	<h1 align = "center">Linked List Visualizer</h1>
 
-
+	<div id ="nodes" style="text-align:center">
+		<span class="head">40<br/>Head</span>
+		<span class="dot">50<br/>Node</span>
+		<span class="dot">60<br/>Node</span>
+		<span class="dot">70<br/>Node</span>
+		<span class="tail">80<br/>Tail</span>
+	</div>
+	
 	<div id ="text">
-		<p id = "p1" align="center">The Following Website is to act as a Simulator of Data Structures.</br>Please pick one of the following options.
+		<p id = "p1" align="center">Enter Data Below to fill linked list
 		</p>		
 	</div>
 
 	<div id = "buttons" style= "width:100%; height:100%"align="center">
-		<button id = "Llist" onclick="lastText();textChanger()">Linked Lists</button>
+		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
+		<button id = "Randomizer" onclick= "Randomizer()">Randomizer</button>
 	</div>
 
-	<script src="js/scripts.js"></script>
-
 </body>
+	<script>
+	function Randomizer(){
+			console.log("here");
+			nodes.style.display = "none";
+			int first = (int)Math.random()*10;
+			int second = (int)Math.random()*10;
+			int third = (int)Math.random()*10;
+			int fourth = (int)Math.random()*10;
+			int fifth = (int)Math.random()*10;
+			document.getElementById("nodes").innerHTML = " ";
+		}
+	</script>
+
+	<script src="js/scripts.js"></script>
 </html>
